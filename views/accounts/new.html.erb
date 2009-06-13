@@ -1,0 +1,27 @@
+<% @page_title = _('Register') -%>
+<% slim_page -%>
+
+<%= page_title %>
+<div class="content-header">
+  &nbsp;
+</div>
+
+<% plus_form_for @user, :url => account_path, :html => html_options_for_account_form do |f| -%>  
+  <%= f.error_messages %>
+  
+  <% f.fieldset do -%>
+    <%= f.label :username, _('Username') + ':', :required => true %>
+    <%= f.text_field :username -%>
+  <% end -%>
+  
+  <% f.fieldset do -%>
+    <%= f.label :plain_password, _('Password') + ': ', :required => true %>
+    <%= f.password_field :plain_password, :explain => _('Password') %>
+  <% end -%>    
+
+  <%= view_extensions :user, :fields, :public, :locals => { :f => f } %>
+
+  <% f.fieldset do -%>
+    <%= f.submit _('Create') %>
+  <% end -%>
+<% end -%>

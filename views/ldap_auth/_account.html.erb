@@ -1,0 +1,6 @@
+<% javascript_tag do -%>    
+  var field = $('user_plain_password'); 
+  if (field) { field.disable(); }
+  field = $('user_plain_password_confirmation'); 
+  if (field) { field.disable(); field.up('fieldset').hide(); }  
+<% end unless @user.admin? -%>

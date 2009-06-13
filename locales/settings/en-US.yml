@@ -1,0 +1,53 @@
+en-US:
+  settings:
+    
+    ldap:
+      label: 'LDAP'
+      groups: 
+        server:
+          label: 'Server settings'
+          settings:
+            host:
+              label: 'Host'
+              description: Please set the directory host.
+            port:
+              label: 'Port'
+              description: Please set the directory port.
+            use_ssl:
+              label: 'Use SSL'
+              description: Connect via SSL?
+            locale:
+              label: 'Global locale'
+              description: Specify your web site locale here.
+            base:
+              label: 'DN Base'
+            domain:
+              label: 'Domain'
+              description: "Use 'username@domain' rather than 'username' only when connecting to the directory."
+            filter:
+              label: 'Filter'
+              description: "LDAP style filter definition. Example: (objectClass=person) & !(msExchHideFromAddressLists=TRUE)"
+        attribute_names:
+          label: 'Directory attributes'
+          description: 'Names of common entry attributes used by the directory server'
+          settings:
+            san:
+              label: 'sAMAccountName'
+              description: Default is 'sAMAccountName'.
+            dn:
+              label: 'DN'
+              description: Default is 'dn'.
+            name:
+              label: 'Name'
+              description: Default is 'name'; 'displayName' is not uncommon.
+            email:
+              label: 'Email'
+              description: Default is 'mail'.
+            description:
+              label: 'Description'
+              description: Default is 'description'.
+            member_of:
+              label: 'Group relations'
+              description: Default is 'memberof'.
+              
+              

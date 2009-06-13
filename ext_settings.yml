@@ -1,0 +1,46 @@
+---
+- !ruby/object:RetroCM::Section
+  name: 'ldap'
+  groups: 
+    - !ruby/object:RetroCM::Group
+      name: 'server'
+      settings:
+        - !ruby/object:RetroCM::StringSetting
+          name: 'host'
+          default: 'ldap.example.net'
+        - !ruby/object:RetroCM::IntegerSetting
+          name: 'port'
+          default: 389
+        - !ruby/object:RetroCM::BooleanSetting
+          name: 'use_ssl'
+          default: false
+        - !ruby/object:RetroCM::StringSetting
+          name: 'base'
+          default: 'dc=example,dc=net'
+        - !ruby/object:RetroCM::StringSetting
+          name: 'domain'
+          allow_blank: true
+        - !ruby/object:RetroCM::StringSetting
+          name: 'filter'
+          allow_blank: true
+    - !ruby/object:RetroCM::Group
+      name: 'attribute_names'
+      settings:        
+        - !ruby/object:RetroCM::StringSetting
+          name: 'san'
+          default: 'sAMAccountName'
+        - !ruby/object:RetroCM::StringSetting
+          name: 'dn'
+          default: 'dn'
+        - !ruby/object:RetroCM::StringSetting
+          name: 'name'
+          default: 'name'
+        - !ruby/object:RetroCM::StringSetting
+          name: 'email'
+          default: 'mail'
+        - !ruby/object:RetroCM::StringSetting
+          name: 'description'
+          default: 'description'
+        - !ruby/object:RetroCM::StringSetting
+          name: 'member_of'
+          default: 'memberof'
