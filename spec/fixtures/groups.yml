@@ -1,0 +1,9 @@
+--- 
+Default: 
+  name: Default 
+  permissions: |
+    --- 
+    tickets: 
+    - view
+  users: Public, agent, admin
+  projects: retro
