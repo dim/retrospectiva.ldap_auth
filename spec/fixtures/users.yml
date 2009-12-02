@@ -18,13 +18,12 @@ agent:
   time_zone: London
   private_key: 6b2c92007c38ca274ea45d8dd52f401b81ae44e6
   groups: Default  
-admin:
-  name: Admin
+admin: # plain_password = password
+  name: Administrator
   admin: true
-  password: b742714644f63a57f3bfe7dbe782451f0fe982b4
-  salt: 987654
+  password: 86499698083f5f58715f008be1fb4d7eac240e97
+  salt: 123456
   username: admin
-  email: admin@somedomain.com
+  email: admin@administration.com
   time_zone: London
-  private_key: 6b2c92007c38ca274ea45d8dd52f401b81ae44e6
-  groups: Default  
+  private_key: de0ed534f6055c365d05c685582edeceef1eafa6

@@ -15,18 +15,18 @@ describe User do
   
   describe 'authentication' do
 
-    def authenticate(username, password = 'somepassword')
-      User.authenticate(:username => username.to_s, :password => password.to_s)
+    def authenticate(username, password = 'password')
+      User.authenticate(:username => username.to_s, :password => password)
     end
 
     it 'should use check the password' do
       User.stub!(:identify).and_return(users(:agent))
-      users(:agent).should_receive(:valid_password?).with('somepassword').and_return(true)        
+      users(:agent).should_receive(:valid_password?).with('password').and_return(true)        
       authenticate(:agent).should == users(:agent)
     end
 
     it 'should query the directory' do
-      Retrospectiva::LDAPAuth.should_receive(:authenticates?).with('agent', 'somepassword').and_return(true)
+      Retrospectiva::LDAPAuth.should_receive(:authenticates?).with('agent', 'password').and_return(true)
       authenticate(:agent).should == users(:agent)
     end
     
@@ -34,15 +34,17 @@ describe User do
             
       it 'should try normal authentication for admins' do
         User.stub!(:identify).and_return(users(:admin))
-        Retrospectiva::LDAPAuth.should_receive(:authenticates?).with('admin', 'somepassword').and_return(false)
-        users(:admin).should_receive(:valid_password_without_ldap?).with('somepassword')
-        authenticate(:admin).should be_nil
+        Retrospectiva::LDAPAuth.should_receive(:authenticates?).with('admin', 'password').and_return(false)
+        authenticate(:admin).should == users(:admin)
+      end
+
+      it 'should fail if normal authentication fails for admins' do
+        authenticate(:admin, 'wrong-password').should be_nil
       end
       
       it 'should fail authentication for normal users' do
         User.stub!(:identify).and_return(users(:agent))
-        Retrospectiva::LDAPAuth.should_receive(:authenticates?).with('agent', 'somepassword').and_return(false)
-        users(:agent).should_not_receive(:valid_password_without_ldap?)
+        Retrospectiva::LDAPAuth.should_receive(:authenticates?).with('agent', 'password').and_return(false)
         authenticate(:agent).should be_nil
       end
     end
