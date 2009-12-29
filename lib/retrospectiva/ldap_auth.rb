@@ -25,13 +25,18 @@ module Retrospectiva
     def self.authenticates?(username, password)
       connect(username, password).connected?
     end 
+
+    def self.config
+      RetroCM[:ldap][:server]      
+    end
   
     class Base  
       attr_reader :conn     
-      delegate :search, :to => :conn      
+      delegate :search, :to => :conn
+      delegate :config, :to => :"Retrospectiva::LDAPAuth"
   
       def initialize(username, password, &block)
-        @username = username
+        @username = extract_username(username)
         @use_ssl  = config[:use_ssl]
         @domain   = config[:domain] unless config[:domain].blank? 
         @filter   = Net::LDAP::Filter.construct(config[:filter]) unless config[:filter].blank?                
@@ -69,7 +74,7 @@ module Retrospectiva
       
       def find_person(san = nil)
         san ||= @username
-        entry = find :first, :filter => construct_filter(san.to_s)
+        entry = find :first, :filter => construct_filter(san.to_s)        
         entry ? Person.new(entry, self) : nil
       end
       
@@ -79,8 +84,8 @@ module Retrospectiva
   
       protected
   
-        def config
-          RetroCM[:ldap][:server]      
+        def extract_username(username)
+          username.to_s.split(/[\\\/]+/).last
         end
     
         def construct_filter(san)

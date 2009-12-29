@@ -9,7 +9,7 @@ describe User do
 
   describe 'secure (salted) authentication' do    
     it 'should be disabled' do
-      User.secure_auth?.should be(false)
+      User.send(:secure_auth?).should be(false)
     end
   end
   

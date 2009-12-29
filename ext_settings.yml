@@ -1,5 +1,16 @@
 ---
 - !ruby/object:RetroCM::Section
+  name: 'general'
+  groups: 
+    - !ruby/object:RetroCM::Group
+      name: 'user_management'
+      settings:
+        - !ruby/object:RetroCM::BooleanSetting
+          name: 'secure_auth'
+          default: false
+          after_change: 'self.value = false'
+
+- !ruby/object:RetroCM::Section
   name: 'ldap'
   groups: 
     - !ruby/object:RetroCM::Group

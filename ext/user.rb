@@ -4,11 +4,6 @@
 #++
 User.class_eval do  
   
-  # Secure (salted) authentication wouldn't work with LDAP
-  def self.secure_auth?
-    false
-  end
-
   # Authenticate user against LDAP. Fallback to standard password authentication
   # if user is an admin to ensure Admin/Setup is still accessible if the 
   # LDAP connection is e.g. not setup correctly 

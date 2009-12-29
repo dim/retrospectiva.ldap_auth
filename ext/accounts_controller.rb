@@ -24,7 +24,7 @@ class AccountsController < ApplicationController
     else
       @user.errors.clear
       if @directory.connected?
-         _('Unable to find user account in directory.')
+        failed_registration _('Unable to find user account in directory.')
       else
         failed_registration _('Invalid username or password.')
       end
